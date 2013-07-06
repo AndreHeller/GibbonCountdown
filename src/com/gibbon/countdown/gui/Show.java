@@ -68,10 +68,6 @@ public class Show extends JFrame
 
     private final Background background = new Background("bg.jpg");
 
-    private final Time riderTime1 = new Time(this, 1, 30);
-
-    private final Time riderTime2 = new Time(this, 1, 30);
-
 
     private final AlphaJPanel topPanel = new AlphaJPanel();
 
@@ -152,13 +148,6 @@ public class Show extends JFrame
 
         pack();
         setVisible(true);
-
-        time1.setText(riderTime1.getTime());
-        time2.setText(riderTime2.getTime());
-
-
-//        riderTime1.initialize();
-//        riderTime2.initialize();
     }
 
 

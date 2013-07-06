@@ -6,23 +6,17 @@ package com.gibbon.countdown.framework;
 
 
 /*******************************************************************************
- * Instances of interface {@code IGUI} represent ...
+ * Instances of interface {@code ICountdown} represent ...
  *
  * @author  André HELLER
  * @version 0.00 — mm/20yy
  */
-public interface IGUI extends IListener
+public interface ICountdown extends IBroadcaster
 {
 //== CONSTATS ==================================================================
-
-    public final int FRAME_HEIGHT = 0;
-
-    public final int FRAME_WIDTH = 0;
 //== DECLARED GETTERS AND SETTERS ==============================================
 
-    /***************************************************************************
-     * Nastaví základní vlastno Framu
-     */
+    public IGUI getGui();
 
 //== INHERITED GETTERS AND SETTERS =============================================
 //== REMAINING DECLARED METHODS ================================================

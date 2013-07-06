@@ -1,19 +1,26 @@
+/* The file is saved in UTF-8 codepage.
+ * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
+ */
 package com.gibbon.countdown.framework;
+
+
 
 /**
  * Třídy implementující IRactable jsou schopné reagovat na události
  * definované v ReactEvent.
  *
- * @author Tetroids
+ * @author  André HELLER
+ * @version 0.00 — mm/20yy
  */
 public interface IReactable
 {
-    /***************************************************************************
-     * Vyvolá reakci na různé typy ReactEventů u tříd implemetujících
-     * toto rozhraní.
-     *
-     * @param reactevent daná událost, na kteoru je třeba reagovat
-     *
-     */
-    public abstract void react();
+//== CONSTATS ==================================================================
+//== DECLARED GETTERS AND SETTERS ==============================================
+
+    public void react();
+    
+//== INHERITED GETTERS AND SETTERS =============================================
+//== REMAINING DECLARED METHODS ================================================
+//== REMAINING INHERITED METHODS ===============================================
+//== EMBEDDED DATA TYPES =======================================================
 }

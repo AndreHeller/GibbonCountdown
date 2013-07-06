@@ -3,8 +3,8 @@
  */
 package com.gibbon.countdown.logic;
 
+import com.gibbon.countdown.framework.ICountdown;
 import com.gibbon.countdown.framework.IReactable;
-import com.gibbon.countdown.gui.Show;
 
 
 
@@ -31,7 +31,7 @@ public class Time implements IReactable
 
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
-    private Show gui;
+    private ICountdown countdown;
 
     private int minute;
 
@@ -48,9 +48,9 @@ public class Time implements IReactable
     /***************************************************************************
      *
      */
-    public Time(Show gui, int minutes, int seconds)
+    public Time(ICountdown countdown, int minutes, int seconds)
     {
-        this.gui = gui;
+        this.countdown = countdown;
         this.minute = minutes;
         this.second = seconds;
         this.hundreth = 0;
@@ -126,7 +126,7 @@ public class Time implements IReactable
             hundreth = 100;
         }
         hundreth--;
-        gui.infoTimeChanged();
+
     }
 
 
