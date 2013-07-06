@@ -3,8 +3,10 @@
  */
 package com.gibbon.countdown.gui;
 
+
+import com.gibbon.countdown.framework.ICountdown;
 import com.gibbon.countdown.framework.IGUI;
-import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
+
 import javax.swing.JFrame;
 
 
@@ -23,6 +25,10 @@ public class Gui extends JFrame implements IGUI
 //== VARIABLE CLASS ATTRIBUTES =================================================
 //== STATIC INITIALIZER (CLASS CONSTRUCTOR) ====================================
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
+
+    private final ICountdown countdown;
+
+
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -33,9 +39,13 @@ public class Gui extends JFrame implements IGUI
     /***************************************************************************
      *
      */
-    public Gui()
+    public Gui(ICountdown countdown)
     {
         super();
+        this.countdown = countdown;
+
+        countdown.addListener(this);
+
     }
 
 
@@ -43,6 +53,14 @@ public class Gui extends JFrame implements IGUI
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
+
+    @Override
+    public void notice()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
@@ -57,4 +75,5 @@ public class Gui extends JFrame implements IGUI
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }
+
 }
