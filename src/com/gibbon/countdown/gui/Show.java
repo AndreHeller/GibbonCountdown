@@ -3,6 +3,7 @@
  */
 package com.gibbon.countdown.gui;
 
+import com.gibbon.countdown.framework.ICountdown;
 import com.gibbon.countdown.logic.Time;
 import com.gibbon.countdown.graphic.Graphic;
 import java.awt.BorderLayout;
@@ -21,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Action;
@@ -81,6 +83,7 @@ public class Show extends JFrame
 
 
 
+
     private final AlphaJPanel rider1 = new AlphaJPanel();
 
     private final JLabel time1 = new JLabel();
@@ -95,6 +98,11 @@ public class Show extends JFrame
 
     private final JLabel name2 = new JLabel("Justyna Wallis (PL)");
 
+
+    Time time_1;
+
+    Time time_2;
+
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -105,11 +113,10 @@ public class Show extends JFrame
     /***************************************************************************
      *
      */
-    public Show()
+    public Show(ICountdown countdown)
     {
         super();
         setFrame();
-
 
         competion.setFont(new Font("Apex New Medium", Font.PLAIN, 60));
         competion.setText("Gibbon Czech Nationals");
@@ -148,6 +155,7 @@ public class Show extends JFrame
 
         pack();
         setVisible(true);
+
     }
 
 
@@ -195,7 +203,6 @@ public class Show extends JFrame
         setResizable(false);
         setUndecorated(true);
 
-        pack();
     }
 
 
@@ -212,28 +219,29 @@ public class Show extends JFrame
         return new Point(widthCenter, heightCenter);
     }
 
-    /***************************************************************************
-     *
-     */
-    public void infoTimeChanged(){
-        time1.setText(riderTime1.getTime());
-        time2.setText(riderTime2.getTime());
-        revalidate();
-        repaint();
-    }
+
+//    /***************************************************************************
+//     *
+//     */
+//    public void infoTimeChanged(){
+//        time1.setText(time_1.getTime());
+//        time2.setText(time_2.getTime());
+//        revalidate();
+//        repaint();
+//    }
 
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
 //== TESTING CLASSES AND METHODS ===============================================
 //
-    /*************************************************************************
-     * Testing method.
-     */
-    public static void test()
-    {
-        Show inst = new Show();
-    }
-    /** @param args Command line arguments - not used. */
-    public static void main(String[] args)  {  test();  }
+//    /*************************************************************************
+//     * Testing method.
+//     */
+//    public static void test()
+//    {
+//        Show inst = new Show();
+//    }
+//    /** @param args Command line arguments - not used. */
+//    public static void main(String[] args)  {  test();  }
 }

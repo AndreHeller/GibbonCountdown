@@ -3,8 +3,13 @@
  */
 package com.gibbon.countdown.logic;
 
+import com.gibbon.countdown.framework.IBroadcaster;
 import com.gibbon.countdown.framework.ICountdown;
+import com.gibbon.countdown.framework.IListener;
 import com.gibbon.countdown.framework.IReactable;
+import java.util.ArrayList;
+import java.util.Collection;
+import com.gibbon.countdown.gui.Show;
 
 
 
@@ -33,6 +38,8 @@ public class Time implements IReactable
 
     private ICountdown countdown;
 
+    private Show show;
+
     private int minute;
 
     private int second;
@@ -48,9 +55,9 @@ public class Time implements IReactable
     /***************************************************************************
      *
      */
-    public Time(ICountdown countdown, int minutes, int seconds)
+    public Time(Show show, int minutes, int seconds)
     {
-        this.countdown = countdown;
+        this.show = show;
         this.minute = minutes;
         this.second = seconds;
         this.hundreth = 0;
@@ -126,7 +133,6 @@ public class Time implements IReactable
             hundreth = 100;
         }
         hundreth--;
-
     }
 
 
@@ -144,7 +150,4 @@ public class Time implements IReactable
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }
-
-
-
 }

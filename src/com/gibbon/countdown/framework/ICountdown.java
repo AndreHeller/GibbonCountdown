@@ -6,16 +6,23 @@ package com.gibbon.countdown.framework;
 
 
 /*******************************************************************************
- * Instances of interface {@code ICountdown} represent ...
+ * Instance rozhraní {@code ICountdown} je pouze jedináček představující logiku
+ * celé aplikace. Rozhraní dědí rozhraní {@link IBroadcaster}.
  *
  * @author  André HELLER
- * @version 0.00 — mm/20yy
+ * @version 1.00 — 07/2013
  */
-public interface ICountdown extends IBroadcaster
+public interface ICountdown
 {
 //== CONSTATS ==================================================================
 //== DECLARED GETTERS AND SETTERS ==============================================
 
+
+    /***************************************************************************
+     * Instance musí umět vráti svoje grafické uživatelské rozhraní
+     *
+     * @return Grafické uživatelské rozhraní
+     */
     public IGUI getGui();
 
 //== INHERITED GETTERS AND SETTERS =============================================

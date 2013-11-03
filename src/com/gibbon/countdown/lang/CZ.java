@@ -1,36 +1,30 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.logic;
-
-
-import com.gibbon.countdown.framework.IReactable;
-import java.util.Timer;
-import java.util.TimerTask;
+package com.gibbon.countdown.lang;
 
 
 
 /*******************************************************************************
- * Intance třídy {@code SuperTimer} představují jednotlivé herní timery
+ * Instances of class {@code CZ} represent ...
  *
  * @author  André HELLER
- * @version 3.00 — 06/2013
+ * @version 1.00 — mm/2013
  */
-public class MainTimer extends Timer
+public class CZ
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
+
+    public static final String
+        R_FIRSTNAME = "Jméno",
+        R_LASTNAME = "Příjmení",
+        R_COUNTRY = "Země";
+
+
 //== VARIABLE CLASS ATTRIBUTES =================================================
 //== STATIC INITIALIZER (CLASS CONSTRUCTOR) ====================================
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
-
-    private MyTask task;
-
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
-
-    private int period;
-
-    private int delay;
-
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
 
@@ -38,35 +32,12 @@ public class MainTimer extends Timer
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
     /***************************************************************************
-     * Konstruktor bez parametru delay. Bez zpoždění
      *
-     * @param reactant
-     * @param event
-     * @param period
      */
-    public MainTimer(IReactable reacter, int period)
+    private CZ()
     {
-        this(reacter, period, 0);
     }
 
-    /***************************************************************************
-     * Konstruktor s nastavitelným zpožděním --> delay
-     *
-     * @param reactant reagující objekt
-     * @param event herní událost
-     * @param period časová perioda
-     * @param delay zpoždení
-     */
-    public MainTimer(IReactable reacter, int period, int delay)
-    {
-        super();
-
-
-
-        this.task = new MyTask(reacter);
-        this.period = period;
-        this.delay = delay;
-    }
 
 
 //== ABSTRACT METHODS ==========================================================
@@ -74,43 +45,7 @@ public class MainTimer extends Timer
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
-
-
-    /***************************************************************************
-     *
-     */
-    public void initialize() {
-        this.schedule(task, delay, period);
-    }
-
-    public void stop() {
-        task.cancel();
-        this.purge();
-    }
-
-    public void play(IReactable reacter){
-        task = new MyTask(reacter);
-        this.schedule(task, delay, period);
-    }
-
-
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
-
-    private class MyTask extends TimerTask {
-
-        private IReactable reacter;
-
-        private MyTask(IReactable reacter)
-        {
-            this.reacter = reacter;
-        }
-
-        @Override
-        public void run() {
-            reacter.react();
-        }
-    }
-
 //== TESTING CLASSES AND METHODS ===============================================
 //
 //    /*************************************************************************
@@ -118,7 +53,7 @@ public class MainTimer extends Timer
 //     */
 //    public static void test()
 //    {
-//        ArcTimer inst = new ArcTimer();
+//        CZ inst = new CZ();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }

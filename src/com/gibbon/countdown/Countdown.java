@@ -4,7 +4,6 @@
 package com.gibbon.countdown;
 
 import com.gibbon.countdown.framework.IGUI;
-import com.gibbon.countdown.framework.IBroadcaster;
 import com.gibbon.countdown.framework.ICountdown;
 import com.gibbon.countdown.framework.IListener;
 import com.gibbon.countdown.gui.Gui;
@@ -23,11 +22,11 @@ import java.util.Collection;
  * @author  André HELLER
  * @version 0.00 — mm/20yy
  */
-public class Countdown implements ICountdown
+public final class Countdown implements ICountdown
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
 
-    private static final Collection<IListener> LISTENERS = new ArrayList<>();
+    private static final Countdown SINGLETON = new Countdown();
 
     private static final Collection<Rider> RIDERS = new ArrayList<>();
 
@@ -38,14 +37,14 @@ public class Countdown implements ICountdown
 //== STATIC INITIALIZER (CLASS CONSTRUCTOR) ====================================
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 
-    private final IGUI gui = new Gui(this);
+    private final IGUI gui = new Gui();
 
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
     private Time riderTime1;
 
     private Time riderTime2;
-    
+
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
 
@@ -53,14 +52,19 @@ public class Countdown implements ICountdown
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
     /***************************************************************************
+     * Tovární metoda vracející odkaz jedináčka aplikace.
      *
+     * @return odkaz na jedináčka
      */
-    public Countdown()
+    public static Countdown getInstance()
     {
-
+        return SINGLETON;
     }
 
-
+    /***************************************************************************
+     * Konstruktor
+     */
+    private Countdown(){}
 
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
@@ -77,37 +81,6 @@ public class Countdown implements ICountdown
 
 
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
-
-    @Override
-    public void addListener(IListener reactant)
-    {
-        LISTENERS.add(reactant);
-    }
-
-
-    @Override
-    public void removeListener(IListener reactant)
-    {
-        LISTENERS.remove(reactant);
-    }
-
-
-    @Override
-    public void removeAllListeners()
-    {
-        LISTENERS.clear();
-    }
-
-
-    @Override
-    public void noticeAll()
-    {
-        for(IListener reactant : LISTENERS){
-            reactant.notice();
-        }
-    }
-
-
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================

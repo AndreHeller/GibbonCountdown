@@ -11,13 +11,9 @@ package com.gibbon.countdown.framework;
  * @author  André HELLER
  * @version 0.00 — mm/20yy
  */
-public interface IGUI extends IListener
+public interface IGUI
 {
 //== CONSTATS ==================================================================
-
-    public final int FRAME_HEIGHT = 0;
-
-    public final int FRAME_WIDTH = 0;
 //== DECLARED GETTERS AND SETTERS ==============================================
 
     /***************************************************************************
