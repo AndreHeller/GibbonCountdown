@@ -1,36 +1,24 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.gui;
+package com.gibbon.countdown.old;
 
-import com.gibbon.countdown.graphic.Graphic;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 
 
 
 /*******************************************************************************
- * Instances of class {@code pozadi} represent ...
+ * Instances of class {@code MenuRider} represent ...
  *
  * @author  André HELLER
- * @version 0.00 — mm/20yy
+ * @version 1.00 — mm/2013
  */
-public class Background extends JPanel
+public class MenuRider extends JMenu
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
 //== VARIABLE CLASS ATTRIBUTES =================================================
@@ -38,8 +26,11 @@ public class Background extends JPanel
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
-    private Image backgroundImage;
+    private JMenuItem addItem;
 
+    private JMenuItem editItem;
+
+    private JMenuItem removeItem;
 
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -50,32 +41,67 @@ public class Background extends JPanel
     /***************************************************************************
      *
      */
-    public Background(String fileName)
+    public MenuRider()
     {
-        super();
-        setLayout(new BorderLayout());
+        super("Riders");
+        setMnemonic('R');
 
-        try {
-            backgroundImage = ImageIO.read(new File(Graphic.class.getResource(fileName).getFile()));
-        }
-        catch (IOException ex) {
-            Logger.getLogger(Background.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        createAddItem();
+        createEditItem();
+        createRemoveItem();
     }
+
 
 
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
-//== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 
+    private void createAddItem(){
+        addItem = new JMenuItem("Přidat");
+        addItem.setMnemonic('P');
+        this.add(addItem);
 
-    @Override
-    public void paintComponent(Graphics g){
-        g.drawImage(backgroundImage, 0, 0, this);
+        addItem.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
     }
 
 
+    private void createEditItem(){
+        editItem = new JMenuItem("Upravit");
+        editItem.setMnemonic('U');
+        this.add(editItem);
+
+        editItem.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+    }
+
+
+    private void createRemoveItem(){
+        removeItem = new JMenuItem("Odebrat");
+        removeItem.setMnemonic('O');
+        this.add(removeItem);
+
+        removeItem.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+    }
+
+//== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
 //== TESTING CLASSES AND METHODS ===============================================
@@ -85,7 +111,7 @@ public class Background extends JPanel
 //     */
 //    public static void test()
 //    {
-//        pozadi inst = new pozadi();
+//        MenuRider inst = new MenuRider();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }

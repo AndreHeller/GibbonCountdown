@@ -1,7 +1,7 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.gui;
+package com.gibbon.countdown.old;
 
 import com.gibbon.countdown.framework.ICountdown;
 import com.gibbon.countdown.logic.Time;

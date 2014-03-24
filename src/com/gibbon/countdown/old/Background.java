@@ -1,18 +1,23 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.gui;
+package com.gibbon.countdown.old;
 
 import com.gibbon.countdown.graphic.Graphic;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.LayoutManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 
@@ -20,12 +25,12 @@ import javax.swing.JPanel;
 
 
 /*******************************************************************************
- * Instances of class {@code AlphaJPanel} represent ...
+ * Instances of class {@code pozadi} represent ...
  *
  * @author  André HELLER
  * @version 0.00 — mm/20yy
  */
-public class AlphaJPanel extends JPanel
+public class Background extends JPanel
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
 //== VARIABLE CLASS ATTRIBUTES =================================================
@@ -33,7 +38,8 @@ public class AlphaJPanel extends JPanel
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
-    private Image alphaImage;
+    private Image backgroundImage;
+
 
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -41,18 +47,16 @@ public class AlphaJPanel extends JPanel
 //##############################################################################
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
-    public AlphaJPanel(){
-        this(new FlowLayout());
-    }
-
     /***************************************************************************
      *
      */
-    public AlphaJPanel(LayoutManager layout)
+    public Background(String fileName)
     {
-        super(layout);
+        super();
+        setLayout(new BorderLayout());
+
         try {
-            alphaImage = ImageIO.read(new File(Graphic.class.getResource("alpha.png").getFile()));
+            backgroundImage = ImageIO.read(new File(Graphic.class.getResource(fileName).getFile()));
         }
         catch (IOException ex) {
             Logger.getLogger(Background.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,17 +64,18 @@ public class AlphaJPanel extends JPanel
     }
 
 
-
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
+//== PRIVATE AND AUXILIARY CLASS METHODS =======================================
+
 
     @Override
     public void paintComponent(Graphics g){
-        g.drawImage(alphaImage, 0, 0, this);
+        g.drawImage(backgroundImage, 0, 0, this);
     }
 
-//== PRIVATE AND AUXILIARY CLASS METHODS =======================================
+
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
 //== TESTING CLASSES AND METHODS ===============================================
@@ -80,7 +85,7 @@ public class AlphaJPanel extends JPanel
 //     */
 //    public static void test()
 //    {
-//        AlphaJPanel inst = new AlphaJPanel();
+//        pozadi inst = new pozadi();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }

@@ -19,8 +19,9 @@ public interface IListener
 
     /***************************************************************************
      * Informuje o udání očekávané akce
+     * @param informant
      */
-    public abstract void notice(Events event);
+    public abstract void notice(IReactable informant);
 
 //== INHERITED GETTERS AND SETTERS =============================================
 //== REMAINING DECLARED METHODS ================================================

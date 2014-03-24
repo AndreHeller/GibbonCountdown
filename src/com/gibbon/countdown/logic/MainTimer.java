@@ -11,10 +11,10 @@ import java.util.TimerTask;
 
 
 /*******************************************************************************
- * Intance třídy {@code SuperTimer} představují jednotlivé herní timery
+ * Intance třídy {@code SuperTimer} představují timer pro každý z časů.
  *
  * @author  André HELLER
- * @version 3.00 — 06/2013
+ * @version 4.00 — 03/2014
  */
 public class MainTimer extends Timer
 {
@@ -23,12 +23,15 @@ public class MainTimer extends Timer
 //== STATIC INITIALIZER (CLASS CONSTRUCTOR) ====================================
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 
+    /** Časový dotaz schopný reagovat na timer */
     private MyTask task;
 
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
+    /** Hodnota opakování */
     private int period;
 
+    /** Nastavitelné zpoždění */
     private int delay;
 
 //== CLASS GETTERS AND SETTERS =================================================
@@ -38,11 +41,11 @@ public class MainTimer extends Timer
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
     /***************************************************************************
-     * Konstruktor bez parametru delay. Bez zpoždění
+     * Konstruktor bez parametru delay. Bez zpoždění.
      *
-     * @param reactant
-     * @param event
-     * @param period
+     * @param reacter objekt, který se ma upozotnit na odbytí nastaveného času
+     *                (periody).
+     * @param period časová perioda, kdy se upozorní objekt
      */
     public MainTimer(IReactable reacter, int period)
     {
@@ -50,18 +53,17 @@ public class MainTimer extends Timer
     }
 
     /***************************************************************************
-     * Konstruktor s nastavitelným zpožděním --> delay
+     * Konstruktor s nastavitelným zpožděním --> delay. Vytvorí instanci dotazu,
+     * které předá objekt pro zavolání metody
      *
-     * @param reactant reagující objekt
-     * @param event herní událost
-     * @param period časová perioda
-     * @param delay zpoždení
+     * @param reacter objekt, který se ma upozotnit na odbytí nastaveného času
+     *                (periody).
+     * @param period časová perioda, kdy se upozorní objekt
+     * @param delay zpoždení, před prvním spuštěním timeru
      */
     public MainTimer(IReactable reacter, int period, int delay)
     {
         super();
-
-
 
         this.task = new MyTask(reacter);
         this.period = period;
@@ -77,17 +79,34 @@ public class MainTimer extends Timer
 
 
     /***************************************************************************
-     *
+     * Inicializace. Spustí timer.
      */
-    public void initialize() {
+    public void start() {
         this.schedule(task, delay, period);
     }
 
-    public void stop() {
+    /***************************************************************************
+     * Pozastaví timer. Zruší přidělěný dotaz.
+     */
+    public void pause() {
         task.cancel();
         this.purge();
     }
 
+    /***************************************************************************
+     * Úplně zastaví timer.
+     */
+    public void cancelThis(){
+        task.cancel();
+        this.cancel();
+    }
+
+    /***************************************************************************
+     * Znovuspuštění timeru. Vytvoří novou instanci dotazu a opět spustí timer.
+     *
+     * @param reacter objekt, který se ma upozotnit na odbytí nastaveného času
+     *                (periody).
+     */
     public void play(IReactable reacter){
         task = new MyTask(reacter);
         this.schedule(task, delay, period);
@@ -96,6 +115,10 @@ public class MainTimer extends Timer
 
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
 
+    /***************************************************************************
+     * Instace trídy {@code MyTask} představují dotazy reagující na odbytí
+     * periody timeru.
+     */
     private class MyTask extends TimerTask {
 
         private IReactable reacter;
@@ -105,6 +128,9 @@ public class MainTimer extends Timer
             this.reacter = reacter;
         }
 
+        /***********************************************************************
+         * Zavolá reakcní metodu objektu.
+         */
         @Override
         public void run() {
             reacter.react();

@@ -1,25 +1,31 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.logic;
+package com.gibbon.countdown.old;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import com.gibbon.countdown.graphic.Graphic;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.LayoutManager;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 
 
 
 
 /*******************************************************************************
- * Instances of class {@code Rider} represent ...
+ * Instances of class {@code AlphaJPanel} represent ...
  *
  * @author  André HELLER
  * @version 0.00 — mm/20yy
  */
-public class Rider
+public class AlphaJPanel extends JPanel
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
 //== VARIABLE CLASS ATTRIBUTES =================================================
@@ -27,15 +33,7 @@ public class Rider
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
-    /** Jméno ridera */
-    private String firstName;
-
-    /** Příjmení ridera */
-    private String lastName;
-
-    /** Země ridera */
-    private String country;
-
+    private Image alphaImage;
 
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -43,64 +41,35 @@ public class Rider
 //##############################################################################
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
+    public AlphaJPanel(){
+        this(new FlowLayout());
+    }
+
     /***************************************************************************
      *
-     * @param firstName
-     * @param lastName
-     * @param country
      */
-    public Rider(String firstName, String lastName, String country)
+    public AlphaJPanel(LayoutManager layout)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
+        super(layout);
+        try {
+            alphaImage = ImageIO.read(new File(Graphic.class.getResource("alpha.png").getFile()));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(Background.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
 
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
-
-    /***************************************************************************
-     * Vrátí podpis ridera ve formátu: Jméno Příjmení (Země)
-     *
-     * @return podpis ridera
-     */
-    public final String getSign(){
-        return firstName + " " + lastName + " (" + country + ")";
-    }
-
-
-    /***************************************************************************
-     * Nastaví jmené ridera
-     *
-     * @param firstName jméno ridera
-     */
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví přijímení ridera
-     *
-     * @param lastName píjmení ridera
-     */
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví zemi ridera
-     *
-     * @param country země ridera
-     */
-    public void setCountry(String country){
-        this.country = country;
-    }
-
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
+
+    @Override
+    public void paintComponent(Graphics g){
+        g.drawImage(alphaImage, 0, 0, this);
+    }
+
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
@@ -111,7 +80,7 @@ public class Rider
 //     */
 //    public static void test()
 //    {
-//        Rider inst = new Rider();
+//        AlphaJPanel inst = new AlphaJPanel();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }

@@ -27,23 +27,10 @@ public interface IBroadcaster
 
 
     /***************************************************************************
-     * Odebere poslcuahče z kolecke posluchačů
-     *
-     * @param listener instance posuchače
-     */
-    public void removeListener(IListener listener);
-
-
-    /***************************************************************************
-     * Vyčistí kolekci posluchačů
-     */
-    public void removeAllListeners();
-
-
-    /***************************************************************************
      * Upozorní všechny posluchače že se stala akce
+     * @param informant
      */
-    public void noticeAll();
+    public void noticeAll(IReactable informant);
 
 //== INHERITED GETTERS AND SETTERS =============================================
 //== REMAINING DECLARED METHODS ================================================

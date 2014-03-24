@@ -18,7 +18,7 @@ public interface IReactable
 //== DECLARED GETTERS AND SETTERS ==============================================
 
     public void react();
-    
+
 //== INHERITED GETTERS AND SETTERS =============================================
 //== REMAINING DECLARED METHODS ================================================
 //== REMAINING INHERITED METHODS ===============================================

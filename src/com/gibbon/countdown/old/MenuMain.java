@@ -1,25 +1,24 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package com.gibbon.countdown.logic;
+package com.gibbon.countdown.old;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 
 
 
 /*******************************************************************************
- * Instances of class {@code Rider} represent ...
+ * Instances of class {@code MenuMain} represent ...
  *
  * @author  André HELLER
- * @version 0.00 — mm/20yy
+ * @version 1.00 — mm/2013
  */
-public class Rider
+public class MenuMain extends JMenu
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
 //== VARIABLE CLASS ATTRIBUTES =================================================
@@ -27,15 +26,17 @@ public class Rider
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
 
-    /** Jméno ridera */
-    private String firstName;
+    /** Položka Nová Hra*/
+    private JMenuItem playAgainItem;
 
-    /** Příjmení ridera */
-    private String lastName;
+    /** Položka Výběru jiné hry */
+    private JMenuItem enterNewGameItem;
 
-    /** Země ridera */
-    private String country;
+    /** Položka ukončit hru */
+    private JMenuItem stopGameItem;
 
+    /** Položka Ukončit aplikaci */
+    private JMenuItem endOfApplicationItem;
 
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
@@ -45,62 +46,39 @@ public class Rider
 
     /***************************************************************************
      *
-     * @param firstName
-     * @param lastName
-     * @param country
      */
-    public Rider(String firstName, String lastName, String country)
+    public MenuMain()
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
+        super("Hlavní");
+        setMnemonic('H');
+
+        createEndOfAppItem();
     }
 
 
 
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
-
-    /***************************************************************************
-     * Vrátí podpis ridera ve formátu: Jméno Příjmení (Země)
-     *
-     * @return podpis ridera
-     */
-    public final String getSign(){
-        return firstName + " " + lastName + " (" + country + ")";
-    }
-
-
-    /***************************************************************************
-     * Nastaví jmené ridera
-     *
-     * @param firstName jméno ridera
-     */
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví přijímení ridera
-     *
-     * @param lastName píjmení ridera
-     */
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví zemi ridera
-     *
-     * @param country země ridera
-     */
-    public void setCountry(String country){
-        this.country = country;
-    }
-
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
+
+    /***************************************************************************
+     * Ukončí celou aplikaci.
+     */
+    private void createEndOfAppItem()
+    {
+        endOfApplicationItem = new JMenuItem("Konec Hry");
+        endOfApplicationItem.setMnemonic('K');
+        this.add(endOfApplicationItem);
+
+        endOfApplicationItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });
+    }
+
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
@@ -111,7 +89,7 @@ public class Rider
 //     */
 //    public static void test()
 //    {
-//        Rider inst = new Rider();
+//        MenuMain inst = new MenuMain();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }

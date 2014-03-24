@@ -3,40 +3,38 @@
  */
 package com.gibbon.countdown.logic;
 
+import com.gibbon.countdown.framework.IBroadcaster;
+import com.gibbon.countdown.framework.IListener;
+import com.gibbon.countdown.framework.IReactable;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 
 
 
 
 /*******************************************************************************
- * Instances of class {@code Rider} represent ...
+ * Instances of class {@code KeyListener} represent ...
  *
  * @author  André HELLER
- * @version 0.00 — mm/20yy
+ * @version 1.00 — mm/2013
  */
-public class Rider
+public class KeyListener implements java.awt.event.KeyListener, IBroadcaster
 {
 //== CONSTANT CLASS ATTRIBUTES =================================================
+
+    /** odkaz na jedináčka */
+    private static final KeyListener SINGLETON = new KeyListener();
+
 //== VARIABLE CLASS ATTRIBUTES =================================================
 //== STATIC INITIALIZER (CLASS CONSTRUCTOR) ====================================
 //== CONSTANT INSTANCE ATTRIBUTES ==============================================
+
+    /** Kolekce posluchačů */
+    private final Collection<IListener> LISTENERS = new ArrayList<IListener>();
+
 //== VARIABLE INSTANCE ATTRIBUTES ==============================================
-
-    /** Jméno ridera */
-    private String firstName;
-
-    /** Příjmení ridera */
-    private String lastName;
-
-    /** Země ridera */
-    private String country;
-
-
 //== CLASS GETTERS AND SETTERS =================================================
 //== OTHER NON-PRIVATE CLASS METHODS ===========================================
 
@@ -44,63 +42,88 @@ public class Rider
 //== CONSTUCTORS AND FACTORY METHODS ===========================================
 
     /***************************************************************************
+     * Tovární metoda vrací odkaz na jedináčka
      *
-     * @param firstName
-     * @param lastName
-     * @param country
+     * @return odkaz na jedináčka
      */
-    public Rider(String firstName, String lastName, String country)
+    public static KeyListener getInstance()
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
+        return SINGLETON;
+    }
+
+
+    /***************************************************************************
+     * privátní kontruktor zabraňující vytvoření instance
+     */
+    private KeyListener()
+    {
     }
 
 
 
 //== ABSTRACT METHODS ==========================================================
 //== INSTANCE GETTERS AND SETTERS ==============================================
-
-    /***************************************************************************
-     * Vrátí podpis ridera ve formátu: Jméno Příjmení (Země)
-     *
-     * @return podpis ridera
-     */
-    public final String getSign(){
-        return firstName + " " + lastName + " (" + country + ")";
-    }
-
-
-    /***************************************************************************
-     * Nastaví jmené ridera
-     *
-     * @param firstName jméno ridera
-     */
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví přijímení ridera
-     *
-     * @param lastName píjmení ridera
-     */
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
-
-    /***************************************************************************
-     * Nastaví zemi ridera
-     *
-     * @param country země ridera
-     */
-    public void setCountry(String country){
-        this.country = country;
-    }
-
 //== OTHER NON-PRIVATE INSTANCE METHODS ========================================
+
+    /***************************************************************************
+     * Událost při stisku klávesy.
+     *
+     * @param e vyvolaná událost.
+     */
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        int keyCode = e.getKeyCode();
+        switch(keyCode){
+            case KeyEvent.VK_ESCAPE: noticeAll(Keys.VK_ESCAPE);break;
+            case KeyEvent.VK_S: noticeAll(Keys.VK_S);break;
+            case KeyEvent.VK_K: noticeAll(Keys.VK_K);break;
+        }
+
+    }
+
+
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+
+    }
+
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        
+    }
+
+
+    /***************************************************************************
+     * Přidá listenera do kolekce posluchačů
+     *
+     * @param listener posluchač
+     */
+    @Override
+    public void addListener(IListener listener)
+    {
+        LISTENERS.add(listener);
+    }
+
+
+    /***************************************************************************
+     * Uporozní všechny posluchače.
+     *
+     * @param informant
+     */
+    @Override
+    public void noticeAll(IReactable informant)
+    {
+        for(IListener listener : LISTENERS){
+            listener.notice(informant);
+        }
+    }
+
+
 //== PRIVATE AND AUXILIARY CLASS METHODS =======================================
 //== PRIVATE AND AUXILIARY INSTANCE METHODS ====================================
 //== EMBEDDED TYPES AND INNER CLASSES ==========================================
@@ -111,7 +134,7 @@ public class Rider
 //     */
 //    public static void test()
 //    {
-//        Rider inst = new Rider();
+//        KeyListener inst = new KeyListener();
 //    }
 //    /** @param args Command line arguments - not used. */
 //    public static void main(String[] args)  {  test();  }
